@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/userInterface.css">
+    <link rel="stylesheet" href="/iForuserInterface.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/feUserInterface2.js"></script> 
+    <script src="/beUserInterface2.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="wrapper">
+            <div class="logo"><a href="/index2">ClassFlow</a></div>
+            <ul class="nav-links">
+                <li><a href="/index2">{{ t "Time-Tables" }}</a></li>
+                <li><a href="/sondage">{{ t "Polls" }}</a></li>
+                <li><a href="/Exams2">{{ t "Exams" }}</a></li>
+                <li><a href="/evenement2">{{ t "Events" }}</a></li>
+            </ul>
+              <div class="right-icons">
+         <div class="theme-toggle">
+         <i class="fas fa-moon"></i>
+         </div>
+         <div class="notification">
+           <i class="fas fa-bell"></i>
+         </div>
+         <div class="profile">
+        <i class="fas fa-user-circle"></i> <!-- FontAwesome user icon -->
+        <span class="user-name">{{user.nom}} {{user.prenom}}</span>
+        <ul class="profile-dropdown">
+  <li>
+    <a href="/userInterface">
+      <i class="fas fa-cog"></i> {{ t "Settings" }} </a>
+  </li>
+  <li>
+    <a href="/logout">
+      <i class="fas fa-sign-out-alt"></i>{{ t "Sign Out" }}</a>
+  </li>
+</ul>
+         </div>
+       </div>
+        </div>
+    </nav>
+    <div id="container">
+    </div>
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4">
+            {{ t "Account settings" }}
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-general">{{ t "General" }}</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#Prefrences">{{ t "Prefrences" }}</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#ResetPass">{{ t "Reset Password" }}</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <p class="pAboutme">{{ t "About me" }}</p>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t "Name" }}</label>
+                                    <input type="text" class="form-control" value="{{user.nom}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t "Surname" }}</label>
+                                    <input type="text" class="form-control mb-1" value="{{user.prenom}}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ t "Birthdate" }}</label>
+                                    <input type="text" class="form-control" value="{{user.date_nec}}" readonly>
+                                    </div>
+                                <div class="form-group">
+  <label class="form-label">{{ t "Work email" }}</label>
+  <div style="display: flex; align-items: center;">
+    <input type="text" id="emailProInput" class="form-control mb-1" value="{{user.emailPro}}" readonly style="flex:1;">
+    <span id="editEmailBtn" style="cursor:pointer; margin-left:8px; color:#18426d;">
+      <i class="fas fa-pencil-alt"></i>
+    </span>
+    <span id="saveEmailBtn" style="display:none; cursor:pointer; margin-left:8px; color:green;">
+      <i class="fas fa-check"></i>
+    </span>
+    <span id="cancelEmailBtn" style="display:none; cursor:pointer; margin-left:4px; color:red;">
+      <i class="fas fa-times"></i>
+    </span>
+  </div>
+  <small id="emailProMsg" class="form-text text-danger" style="display:none;"></small>
+</div>
+                                <p class="pAcademic">{{ t "Academic Informations" }}</p>
+                                 <div class="form-group">
+  <label class="form-label">{{ t "Level" }}</label>
+  <div class="form-control" style="height: auto; min-height: 38px;" readonly>
+    {{#if user.level}}
+      {{user.level}} in {{user.speciality}}
+    {{else}}
+      Not specified
+    {{/if}}
+  </div>
+</div>
+<div class="form-group">
+  <label class="form-label">{{ t "Section and Group" }}</label>
+  <div id="sectionGroupDisplay" class="form-control" style="height: auto; min-height: 38px;" readonly>
+    Loading...
+  </div>
+</div>
+                            </div>
+                        </div>
+
+                         <div class="tab-pane fade" id="ResetPass">
+    <div class="card-body pb-2">
+        <form id="passwordResetForm">
+            <div class="form-group">
+                <label class="form-label">{{ t "Current Password" }}</label>
+                <input type="password" class="form-control" name="currentPassword" id="currentPassword" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">{{ t "New Password" }}</label>
+                <input type="password" class="form-control" name="newPassword" id="newPassword" 
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                <div class="password-requirements mt-2">
+                    <small class="text-muted">{{ t "Password must contain:" }}</small>
+                    <ul class="list-unstyled">
+                        <li id="length-req" class="text-danger"><i class="fas fa-times-circle"></i> {{ t "At least 8 characters" }}</li>
+                        <li id="lowercase-req" class="text-danger"><i class="fas fa-times-circle"></i> {{ t "At least one lowercase letter" }}</li>
+                        <li id="uppercase-req" class="text-danger"><i class="fas fa-times-circle"></i> {{ t "At least one uppercase letter" }}</li>
+                        <li id="number-req" class="text-danger"><i class="fas fa-times-circle"></i> {{ t "At least one number" }}</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">{{ t "Confirm New Password" }}</label>
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
+                <div id="passwordMatchError" class="text-danger small mt-1"></div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" id="changePasswordBtn" disabled>{{ t "Change Password" }}</button>
+        </form>
+    </div>
+</div>
+
+
+                        <div class="tab-pane fade" id="Prefrences">
+    <div class="card-body pb-2">
+         <div class="card-body pb-2">
+                                  <div class="form-group d-flex align-items-center">
+      <label class="form-label mb-0 mr-2">{{ t "Language" }}</label>
+      <select id="languageSelect" class="form-control w-auto ml-auto">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+    <!-- You can keep or remove the random checkbox below -->
+    <!--
+    <div class="form-group d-flex align-items-center">
+      <label class="form-label mb-0 mr-2">random</label>
+      <input type="checkbox" class="form-control w-auto ml-auto" id="displayRequestsCheckbox" {{#if user.displayRequests}}checked{{/if}}>
+    </div>
+    -->
+  </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- <div class="text-right mt-3" style="margin-top: 0.5rem;">
+        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+        <button type="button" class="btn btn-default">Cancel</button>
+    </div> --}}
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        // Additional JavaScript if needed
+    </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('passwordResetForm');
+    const btn = document.getElementById('changePasswordBtn');
+    const matchError = document.getElementById('passwordMatchError');
+    const newPassword = document.getElementById('newPassword');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    // Password validation
+    function validatePassword() {
+        const value = newPassword.value;
+        let valid = true;
+        document.getElementById('length-req').className = value.length >= 8 ? 'text-success' : 'text-danger';
+        document.getElementById('lowercase-req').className = /[a-z]/.test(value) ? 'text-success' : 'text-danger';
+        document.getElementById('uppercase-req').className = /[A-Z]/.test(value) ? 'text-success' : 'text-danger';
+        document.getElementById('number-req').className = /\d/.test(value) ? 'text-success' : 'text-danger';
+        if (
+            value.length < 8 ||
+            !/[a-z]/.test(value) ||
+            !/[A-Z]/.test(value) ||
+            !/\d/.test(value)
+        ) {
+            valid = false;
+        }
+        btn.disabled = !valid || newPassword.value !== confirmPassword.value;
+    }
+
+    newPassword.addEventListener('input', validatePassword);
+    confirmPassword.addEventListener('input', function() {
+        if (newPassword.value !== confirmPassword.value) {
+            matchError.textContent = "Passwords do not match.";
+            btn.disabled = true;
+        } else {
+            matchError.textContent = "";
+            validatePassword();
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        fetch('/auth/userInterface2', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                currentPassword: form.currentPassword.value,
+                newPassword: form.newPassword.value,
+                confirmPassword: form.confirmPassword.value
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            btn.disabled = false;
+            if (data.message) {
+                alert(data.message);
+                form.reset();
+            } else if (data.error) {
+                alert(data.error);
+            }
+        })
+        .catch(() => {
+            btn.disabled = false;
+            alert('An error occurred. Please try again.');
+        });
+    });
+});
+</script>
+
+<script>document.addEventListener('DOMContentLoaded', function() {
+  const sectionGroupDiv = document.getElementById('sectionGroupDisplay');
+  if (sectionGroupDiv) {
+    fetch('/api/student/section-group')
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          sectionGroupDiv.textContent = "Not specified";
+        } else {
+          sectionGroupDiv.textContent = `${data.section_name} - G${data.group_number}`;
+        }
+      })
+      .catch(() => {
+        sectionGroupDiv.textContent = "Not specified";
+      });
+  }
+});</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const emailInput = document.getElementById('emailProInput');
+  const editBtn = document.getElementById('editEmailBtn');
+  const saveBtn = document.getElementById('saveEmailBtn');
+  const cancelBtn = document.getElementById('cancelEmailBtn');
+  const msg = document.getElementById('emailProMsg');
+  let originalValue = emailInput.value;
+
+  editBtn.onclick = function() {
+    emailInput.readOnly = false;
+    emailInput.focus();
+    editBtn.style.display = 'none';
+    saveBtn.style.display = '';
+    cancelBtn.style.display = '';
+  };
+  cancelBtn.onclick = function() {
+    emailInput.value = originalValue;
+    emailInput.readOnly = true;
+    editBtn.style.display = '';
+    saveBtn.style.display = 'none';
+    cancelBtn.style.display = 'none';
+    msg.style.display = 'none';
+  };
+  saveBtn.onclick = function() {
+    const newEmail = emailInput.value.trim();
+    if (!/^[^@]+@[^@]+\.[^@]+$/.test(newEmail)) {
+      msg.textContent = 'Invalid email format';
+      msg.style.display = '';
+      return;
+    }
+    fetch('/auth/update-emailPro-student', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ emailPro: newEmail })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        originalValue = newEmail;
+        emailInput.readOnly = true;
+        editBtn.style.display = '';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        msg.style.display = 'none';
+      } else {
+        msg.textContent = data.message || 'Update failed';
+        msg.style.display = '';
+      }
+    })
+    .catch(() => {
+      msg.textContent = 'Server error';
+      msg.style.display = '';
+    });
+  };
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Load preferences
+  fetch('/api/student/preferences')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('languageSelect').value = data.language || 'en';
+      const displayCheckbox = document.getElementById('displayRequestsCheckbox');
+      if (displayCheckbox) displayCheckbox.checked = !!data.displayRequests;
+    });
+
+  // Save on change
+  document.getElementById('languageSelect').addEventListener('change', savePrefs);
+  const displayCheckbox = document.getElementById('displayRequestsCheckbox');
+  if (displayCheckbox) displayCheckbox.addEventListener('change', savePrefs);
+
+  function savePrefs() {
+    fetch('/api/student/preferences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        language: document.getElementById('languageSelect').value,
+        displayRequests: displayCheckbox ? displayCheckbox.checked : false
+      })
+    }).then(() => location.reload());
+  }
+});
+</script>
+</body>
+
+</html>

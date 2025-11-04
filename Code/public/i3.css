@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+nav {
+  position:fixed;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  background: #18426d;
+  height: 70px;
+  /* box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.788); badalt hadi */
+
+}
+
+.Navwrapper {
+  height: 65px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}                
+.logo a {
+  color: #f2f2f2 !important;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  margin: 0 auto;
+  margin-top: -10px;
+  padding-left:30px;
+}
+
+.right-icons{
+  display: flex;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links li a {
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 9px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.Navprofile {
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  padding: 9px 5px;
+  width: 162.77px;
+  display: flex;
+  align-items: center;
+  color: white; /* Set default text color to white */
+}
+
+.nav-links li a:hover {
+  background: #0c2946;
+}
+
+.Navprofile:hover {
+  background: #0c2946;
+}
+
+
+.theme-toggle i,
+.notification i {
+  font-size: 18px;
+  color: #f2f2f2;
+  cursor: pointer;
+  margin-top: 24px; /* Increased value to push icons further down */
+}
+
+
+.Navprofile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #f2f2f2;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 85px;
+  right: 20px;
+  background: #18426d;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  /* border-style: solid; */
+  width: 160px;
+  padding: 0;
+  z-index: 100; 
+  border-radius: 2.5%;
+}
+
+.profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 65px;
+  width: 20px;
+  height: 20px;
+  background-color: #18426d;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+
+
+.profile-dropdown li {
+  list-style: none;
+}
+
+.profile-dropdown li a {
+  display: block;
+  padding: 10px;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.profile-dropdown li a:hover {
+  background: #0c2946;
+}
+
+.Navprofile.active .profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 970px) {
+  .nav-links {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    max-width: 350px;
+    top: 0;
+    left: -100%;
+    background: #242526;
+    flex-direction: column;
+    padding: 50px 10px;
+    line-height: 50px;
+    overflow-y: auto;
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.18);
+    transition: all 0.3s ease;
+  }
+
+  #menu-btn:checked ~ .nav-links {
+    left: 0%;
+  }
+
+  .nav-links li {
+    margin: 15px 10px;
+  }
+
+  .nav-links li a {
+    padding: 0 20px;
+    font-size: 20px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #242526;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A3B3C;
+}
+
+
+.fa-user-circle {
+  font-size: 24px; /* Adjust icon size */
+  color: white; /* Set icon color to white */
+  margin-right: 8px; /* Add spacing between icon and text */
+}
+
+.user-name {
+  color: white; /* Ensure the user name text is white */
+}
+
+.profile-dropdown li a {
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  padding: 10px;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.profile-dropdown li a i {
+  margin-right: 8px; /* Add spacing between icon and text */
+  font-size: 14px; /* Adjust icon size */
+  padding-left: 5px;
+
+}
+
+
+.notification-dropdown {
+  position: absolute;
+  top: 85px; /* Adjust to align below the bell icon */
+  right: 168px;
+  background: #fcfcfc;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  width: 320px; /* Match profile-dropdown width */
+  padding: 0;
+  z-index: 100;
+}
+
+.notification-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 25px; /* Adjust to point to the bell icon */
+  width: 20px;
+  height: 20px;
+  background-color: #fcfcfc;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.notification.active .notification-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.notification-dropdown li {
+  list-style: none;
+}
+
+.notification-dropdown li a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #000000;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.notification-dropdown li a i {
+  margin-right: 8px;
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.notification-dropdown li a:hover {
+  background: #e0e0e0;
+}
+
+
+.notification-count {
+  position: absolute;
+  top: 17px;
+  right: 199px;
+  background-color: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: bold;
+}
+
+.notification-header a {
+  margin-left: 120px;
+  font-weight: normal;
+  font-size: 12px;
+  color: #18426d;
+  text-decoration: none;
+}
+
+.notification-items {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+  background-color: #f5f5f5;
+}
+
+.notification-item.unread {
+  background-color: #f0f8ff;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+}
+
+.notification-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.notification-status.seen {
+  background-color: #ffa502; /* Orange for pending */
+}
+
+.notification-status.accepted {
+  background-color: #2ed573; /* Green for accepted */
+}
+
+.notification-status.rejected {
+  background-color: #ff4757; /* Red for rejected */
+}
+
+.notification-status.unseen {
+  background-color: #1e90ff; /* Blue for unseen */
+}
+
+.notification-actions {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-menu-trigger {
+  cursor: pointer;
+  padding: 5px;
+  color: #18426d;
+  margin-left: 10px;
+}
+
+.notification-actions-menu {
+  display: none;
+  position: absolute;
+  right: 5;
+  top: 100%;
+  background-color: white;
+  width: 165px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.notification-actions-menu a {
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-left: -1px;
+}
+
+.notification-actions-menu a:hover {
+  background-color: #f5f5f5;
+}
+
+.notification-actions-menu a i {
+  margin-right: 8px;
+  width: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.notification-actions-menu.show {
+  display: block;
+}
+
+.optional-text {
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+#points {
+  color: black;
+}
+
+.notification-actions-menu i{
+  color: rgb(156, 156, 156);
+}
+
+/* Custom scrollbar for notification menu */
+.notification-items::-webkit-scrollbar-track {
+  background: #f0f0f0; 
+}
+
+.notification-items::-webkit-scrollbar-thumb {
+  background: #a7a2a2;
+  border-radius: 5px;
+}
+
+.notification-items::-webkit-scrollbar-thumb:hover {
+  background: #757575;
+}
+
+.popind {
+  display: block;
+}
+
+#filter-unseen-btn {
+  display: block;
+  margin-top: 5px;
+  margin-left: 0;
+}
+
+/* Add to your CSS */
+.notification-item .fa-hourglass-end {
+  color: #FF9800;
+  margin-right: 10px;
+}

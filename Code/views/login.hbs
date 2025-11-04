@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login </title>
+  <link rel="stylesheet" href="/login.css">
+
+</head>
+
+
+
+ <body> 
+  <h1>Login Page</h1>
+
+  <section> <span class="num" data-num="1"></span>   <span class="num" data-num="2"></span>   <span class="num" data-num="3"></span>   <span class="num" data-num="4"></span>   <span class="num" data-num="5"></span>   <span class="num" data-num="6"></span>   <span class="num" data-num="7"></span>   <span class="num" data-num="8"></span>   <span class="num" data-num="9"></span>   <span class="num" data-num="0"></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+   <div class="signin"> 
+
+    <div class="content"> 
+
+     <h2>Sign In</h2> 
+
+     {{#if error}}
+        <p style="color: red;">{{error}}</p>
+    {{/if}}
+
+     <!-- <div class="form">  -->
+      <!-- ...existing code... -->
+<form id="userLoginForm" class="form" action="/auth/login" method="POST">
+  <div class="inputBox">
+    <input type="email" name="email" required> <i>Email</i>
+  </div>
+  <div class="inputBox">
+    <input type="password" name="password" required> <i>Password</i>
+  </div>
+  <div class="links">
+    <a href="/Signup">Signup</a>
+    {{!-- <a href="#" id="showAdminLogin">Admin?</a> --}}
+  </div>
+  <div class="inputBox">
+    <input type="submit" value="login">
+  </div>
+</form>
+
+<!-- Admin login step 1 -->
+<div id="adminStep1" style="display:none;">
+  <form id="adminLoginStep1" class="form">
+    <div class="inputBox">
+    <input type="email" name="email" required placeholder="Admin Email">
+    </div>
+    <div class="inputBox">
+    <input type="password" name="password" required placeholder="Admin Password">
+    </div>
+    <div class="inputBox2">
+    <button type="submit">Next</button>
+    </div>
+  </form>
+</div>
+<!-- Admin login step 2 -->
+<div id="adminStep2" style="display:none;">
+  <form id="adminLoginStep2">
+    <input type="text" name="secretCode" required placeholder="Secret Code">
+
+    <button type="submit">Verify</button>
+
+  </form>
+</div>
+<!-- ...existing code... -->
+    </div> 
+
+   </div> 
+
+  </section> 
+
+ </body>
+
+ <script>
+const SECRET_CODE = "13265"; // Change this to your secret code
+let inputCode = "";
+
+document.querySelectorAll('.num').forEach(span => {
+  span.addEventListener('click', function() {
+    inputCode += this.dataset.num;
+    if (inputCode.length === 5) {
+      if (inputCode === SECRET_CODE) {
+        // Show admin login form
+        document.getElementById('userLoginForm').style.display = 'none';
+        document.getElementById('adminStep1').style.display = 'block';
+      } else {
+        // Optional: shake or indicate error
+        inputCode = ""; // Reset on wrong code
+      }
+    }
+  });
+});
+</script>
+<script>
+document.getElementById('adminLoginStep1').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const response = await fetch('/auth/admin/step1', {
+    method: 'POST',
+    body: JSON.stringify(Object.fromEntries(formData)),
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const data = await response.json();
+  if (data.success) {
+    document.getElementById('adminStep1').style.display = 'none';
+    document.getElementById('adminStep2').style.display = 'block';
+  } else {
+    alert(data.error || 'Step 1 failed');
+  }
+});
+
+document.getElementById('adminLoginStep2').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const response = await fetch('/auth/admin/step2', {
+    method: 'POST',
+    body: JSON.stringify(Object.fromEntries(formData)),
+    headers: { 'Content-Type': 'application/json' }
+  });
+  const data = await response.json();
+  if (data.success) {
+    window.location.href = data.redirect;
+  } else {
+    alert(data.error || 'Step 2 failed');
+  }
+});
+</script>
+</html>
+
+  

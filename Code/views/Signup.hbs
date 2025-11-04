@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Signin </title>
+  <link rel="stylesheet" href="/Signup.css">
+  <script src="/feSignup.js"></script> 
+</head>
+
+
+
+ <body> 
+
+  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
+
+<div class="signin"> 
+      <div class="content"> 
+        <h2>Sign Up</h2> 
+  
+   {{#if error}}
+        <p style="color: red;">{{error}}</p>
+    {{/if}}
+
+        <form class="form" action="/auth/Signup" method="POST" id="signupForm">
+
+          <!-- Honeypot field for bot prevention -->
+          <div class="honeypot">
+            <input type="text" name="honeypot" id="honeypot">
+          </div>
+
+          <div class="formbold-input-flex">
+          <div class="inputBox"> 
+            <input type="text" name="nom" id="nom" pattern="[A-Za-zÀ-ÿ0-9&'’\-_. ]+" required>
+<i>Name</i>
+            <div class="validation-icon"></div>
+            {{!-- <div class="requirements">Only alphabetic characters, minimum 2 letters</div> --}}
+          </div>
+          <div class="inputBox"> 
+            <input type="text" name="prenom" id="prenom" pattern="[A-Za-zÀ-ÿ0-9&'’\-_. ]+" required>
+<i>Surname</i>
+            <div class="validation-icon"></div>
+            {{!-- <div class="requirements">Only alphabetic characters, minimum 2 letters</div> --}}
+          </div>
+          </div>
+
+          <div class="inputBox"> 
+            <input type="email" name="email" id="email" required> 
+            <i>Email</i>
+            <div class="validation-icon"></div>
+            {{!-- <div class="requirements">Valid email format (e.g., user@example.com)</div> --}}
+          </div> 
+
+          <div class="formbold-input-flex">
+          <div class="inputBox"> 
+            <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required> 
+            <i>Password</i>
+            <div class="validation-icon"></div>
+            <div class="requirements" >
+              Password must contain:
+              <ul>
+                <li id="length" class="invalid">At least 8 characters</li>
+                <li id="lowercase" class="invalid">At least one lowercase letter</li>
+                <li id="uppercase" class="invalid">At least one uppercase letter</li>
+                <li id="number" class="invalid">At least one number</li>
+              </ul>
+            </div>
+          </div> 
+          <div class="inputBox"> 
+            <input type="password" name="confirm_password" id="confirm_password" required> 
+            <i>Confirm Password</i>
+            <div class="validation-icon"></div>
+            <div class="error-message" id="confirmPasswordError"></div>
+          </div>
+          </div>
+          
+          <div class="inputBox"> 
+            <input type="text" name="cle" id="cle" pattern="#(AD|PR|ET)[a-zA-Z0-9]{12}" required> 
+            <i>Key</i>
+            <div class="validation-icon"></div>
+            <div class="requirements">Must start with # followed by AD, PR, or ET, and exactly 12 alphanumeric characters</div>
+          </div>
+
+          <div class="links"> 
+            <a href="/login">SignIn</a> 
+          </div> 
+
+          <div class="inputBox"> 
+            <input type="submit" value="Signup" id="submitBtn" disabled> 
+          </div> 
+    
+    </form>
+     
+  <!-- </div>  -->
+
+    </div> 
+
+   </div> 
+
+  </section> 
+
+ </body>
+
+</html>
+
+  

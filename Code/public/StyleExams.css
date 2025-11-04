@@ -1,0 +1,49 @@
+body{
+    margin-top: 100px;
+}
+
+  #exam-timetable table {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(24,66,109,0.08);
+  }
+  #exam-timetable th {
+    background: #18426d;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+  }
+  #exam-timetable td {
+    background: #f8f9fb;
+    color: #18426d;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    vertical-align: middle;
+  }
+   #exam-timetable tr:not(:last-child) td {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  
+  #exam-timetable td:hover  {
+    background: #e6f0fa;
+    transition: background 0.2s;
+  } 
+  #exam-timetable {
+    margin-top: 30px;
+  }
+
+  #exam-timetable tbody tr:hover td:not([rowspan]) {
+  background: #e6f0fa !important;
+  transition: background 0.2s;
+}
+
+#exam-timetable td[rowspan] {
+  background: #f0f4fa;
+  font-weight: 600;
+}
+  

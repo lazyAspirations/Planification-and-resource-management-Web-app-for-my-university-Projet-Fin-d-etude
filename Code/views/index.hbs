@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>{{ t "Home" }}</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">    <!--les icon makanoch yatafichaw 5atch hada lien tsupprima tsama-->
+      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" href="/i.css">
+      <link rel="stylesheet" href="/style.css"> 
+   </head>
+    
+   <body>
+
+<!-- BEGINNING OF GREETING MESSAGE -->
+    {{!-- <div id="greeting-message" class="greeting" data-user-email="{{user.email}}">
+    <h1>Welcome, {{user.nom}} {{user.prenom}}!</h1>
+</div>
+<audio id="greeting-sound" src="/thisone.mp3"></audio>     --}}
+<!-- END OF GREETING MESSAGE -->
+
+
+<!-- BEGINNING OF NAV BAR -->
+ <nav>
+        <div class="Navwrapper">
+         <div class="logo"><a href="/index">ClassFlow</a></div>
+       <ul class="nav-links">
+         <li><a href="/index">{{ t "Time-Tables" }}</a></li>
+         <li><a href="/Sondage_Ens">{{ t "Polls" }}</a></li>
+         <li><a href="/Exams">{{ t "Exams" }}</a></li>
+         <li><a href="/evenement">{{ t "Events" }}</a></li>
+       </ul>
+   <div class="right-icons">
+         {{!-- <div class="theme-toggle">
+         <i class="fas fa-moon"></i>
+         </div> --}}
+         <!-- Update the notification dropdown in your nav bar -->
+<div class="notification">
+  <i class="fas fa-bell"></i>
+  <span class="notification-count" id="notification-count">0</span>
+  <ul class="notification-dropdown">
+    <li class="notification-header">
+      <div class="popind">
+  <span>{{ t "Notifications" }}</span>
+  <button id="filter-unseen-btn" style="margin-left:5px; padding:2px 10px; border-radius:5px; border:1px solid #18426d; background:#e0e0e0; color:#18426d; font-size:12px; cursor:pointer; display:box;">Unseen</button>
+  </div>
+  <div class="notification-actions">
+    <i class="fas fa-ellipsis-v notification-menu-trigger" id="points"></i>
+    <div class="notification-actions-menu">
+      <a href="/NotificationEns"><i class="fas fa-list"></i> {{ t "See all" }}</a>
+      <a href="#" id="mark-all-read"><i class="fas fa-check-double"></i> {{ t "Mark all as read" }}</a>
+    </div>
+  </div>
+</li>
+    <div class="notification-items" id="notification-items">
+      <!-- Notifications will be loaded here dynamically -->
+    </div>
+  </ul>
+</div>
+         <div class="Navprofile">
+        <i class="fas fa-user-circle"></i> 
+        <span class="user-name">{{user.nom}}  {{user.prenom}}</span>
+        <ul class="profile-dropdown">
+         <li>
+           <a href="/userInterface">
+           <i class="fas fa-cog"></i> {{ t "Settings" }}</a>
+         </li>
+         <li>
+           <a href="/logout">
+           <i class="fas fa-sign-out-alt"></i>{{ t "Sign Out" }}</a>
+         </li>
+       </ul>
+         </div>
+       </div>
+     </div>
+   </nav>
+<!-- END OF NAV BAR -->
+
+
+<!-- BEGINING OF SELECT FOR TIMETABLE -->
+<div class="timetable-controls">
+  <div class="wrapper">
+    <div class="select-btn" style="text-align:center;">
+      <span>{{ t "My Timetable" }}</span>
+      <i class="uil uil-angle-down"></i>
+    </div>
+    <div class="content">
+      <div class="search">
+        <i class="uil uil-search"></i>
+        <input spellcheck="false" type="text" placeholder="Search">
+      </div>
+      <ul class="options">
+        <!-- Options will be added dynamically -->
+      </ul>
+    </div>
+  </div>
+  <!-- Hidden original select for form submission -->
+  <select id="timetable-select" style="display: none;">
+    <option value="">{{ t "Loading groups" }}...</option>
+  </select>
+</div>
+<!-- ENDING OF SELECT FOR TIMETABLE -->
+
+
+<!-- BEGINING OF SHOW REQUESTS -->
+<div class="form-group">
+  <label>
+    <input type="checkbox" class="form-control w-auto ml-auto" />
+    <span class="show-requests-icon"><i class="fas fa-clipboard-list"></i></span>
+    <span class="show-requests-text">{{ t "show my requests" }}</span>
+  </label>
+</div>
+<!-- ENDING OF SHOW REQUESTS -->
+
+
+<!--BEGENING OF TABLE-->
+  <table class="timetable" id="timetable">
+    <tbody>
+       <thead>
+          <tr>
+            <td id="sub1"></td>
+            <td class="sub">{{ t "1st Session"}}   <!--badalt hadi-->
+              <span>8:00-9:30</span>  <!--zadt hadi-->
+            </td>
+            <td class="sub">{{ t "2nd Session" }}
+              <span>9:35-11:05</span>
+            </td>
+            <td class="sub">{{ t "3rd Session" }}
+             <span> 11:10-12:40</span>
+            </td>
+            <td class="sub">{{ t "4th Session" }}
+              <span>12:45-14:15</span>
+            </td>
+            <td class="sub">{{ t "5th Session" }}
+              <span>14:20-15:50</span>
+            </td>
+         </tr>
+      </thead>
+         
+         <tr>
+             <td class="sub">{{ t "Sunday" }}</td> <!--badalt hadi-->
+             <td class="firstbox">SUB1<br>fef </td>
+             <td class="firstbox">SUB2</td> <!--OBLIGATOIRE nbadlo les id vers class id lazam ikoun unique-->
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr>
+         <tr>
+             <td class="sub">{{ t "Monday" }}</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">{{ t "Tuesday" }}</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">{{ t "Wednesday" }}</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">{{ t "Thursday" }}</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox ">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">{{ t "Saturday" }}</td>
+             <td class="lastbox">SUB1</td>
+             <td class="lastbox">SUB2</td>
+             <td class="lastbox">SUB3</td>               
+             <td class="lastbox">SUB4</td>
+             <td class="lastbox">SUB5</td>
+          </tr>
+          <tr id="online-row">
+             <td class="sub">{{ t "ONLINE" }}</td>
+             <td colspan="5" class="online-session-cell"></td>
+          </tr>
+      </tbody>
+   </table>
+<!--END OF TABLE-->
+   
+
+<!-- BEGINING OF SMALL POPUP MENU -->
+<div id="popup-menu" class="popup-menu">
+  <ul>
+      <li class="ajouter">{{ t "Add" }}</li>
+      <li class="modifier">{{ t "Modify" }}</li>
+      <li class="supprimer">{{ t "Delete" }}</li>
+  </ul>
+</div>
+<!-- END OF SMALL POPUP MENU -->
+
+
+<!-- BEGINING OF BIG POPUP MENU FOR ADD -->
+<div id="big-popup-menu" class="big-popup-menu">
+
+  <span class="close-btn">&times;</span>
+
+  <h3>{{ t "Add a Session" }}</h3>
+
+  <form id="add-session-form" action="/submit" method="POST" style="display: flex; gap: 20px;">
+    <!-- Left Section -->
+    <div style="flex: 1;">
+      <div class="input-box">
+        <span>{{ t "Session Frequency" }}:</span>
+        <div id="radio-group" class="radio-group">
+          <label>{{ t "Weekly" }}</label>
+          <input type="radio" id="Hebdomadaire" name="Frequence" value="Hebdomadaire" required />
+          <label>{{ t "Onetime" }}</label>
+          <input type="radio" id="Exepcionnel" name="Frequence" value="Exepcionnel" required />
+        </div>
+      </div>
+
+      <div>
+        <label for="isOnline" class="bold-label">{{ t "Online" }}</label>
+        <input type="checkbox" id="isOnline" name="isOnline">
+      </div>
+
+      <div class="input-box">
+        <span>{{ t "Day:" }}</span>
+        <select id="Jour" name="Jour">
+          <option value="">-- {{ t "Select a day" }}--</option>
+          <option value="Sunday">{{ t "Sunday" }}</option>
+          <option value="Monday">{{ t "Monday" }}</option>
+          <option value="Tuesday">{{ t "Tuesday" }}</option>
+          <option value="Wednesday">{{ t "Wednesday" }}</option>
+          <option value="Thursday">{{ t "Thursday" }}</option>
+          <option value="Saturday">{{ t "Saturday" }}</option>
+        </select>
+      </div>
+
+      <div class="input-box">
+        <span>{{ t "Session Time" }}:</span>
+        <select id="horaire" name="horaire">
+          <option value="">-- Select time --</option>
+          <option value="1st Session">{{ t "1st Session" }} (8:00-9:30)</option>
+          <option value="2nd Session">{{ t "2nd Session" }} (9:35-11:05)</option>
+          <option value="3rd Session">{{ t "3rd Session" }} (11:10-12:40)</option>
+          <option value="4th Session">{{ t "4th Session" }} (12:45-14:15)</option>
+          <option value="5th Session">{{ t "5th Session" }}(14:20-15:50)</option>
+        </select>
+      </div>
+
+      <div class="input-box">
+        <span>{{ t "Session Type" }}:</span>
+        <select id="type_Seance" name="type_Seance">
+          <option value="">-- {{ t "Select a type " }}--</option>
+          <option value="LECTURE">{{ t "Lectur" }}</option>
+          <option value="TUTORIAL">{{ t "Tutorial" }}</option>
+          <option value="LAB">{{ t "Lab" }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Separator -->
+    <div style="width: 1px; background-color: #ccc;"></div>
+
+    <!-- Right Section -->
+    <div style="flex: 1;">
+      
+
+      <div class="input-box">
+        <span>{{ t "Module" }}:</span>
+        <select id="id_module" name="id_module">
+          <!-- Add module options here -->
+        </select>
+      </div>
+      
+      <div class="input-box">
+    <span>{{ t "Academic Selection" }}:</span>
+    <div class="selection-path" id="selection-path">
+        {{ t "Start by selecting a niveau" }}
+    </div>
+    <div class="selection-results">
+        <div class="level-options active" data-level="niveau">
+            <!-- Niveau options will be loaded here -->
+        </div>
+        <div class="level-options" data-level="spec">
+            <!-- Specialité options will be loaded here -->
+        </div>
+        <div class="level-options" data-level="section">
+            <!-- Section options will be loaded here -->
+        </div>
+        <div class="level-options" data-level="group">
+            <!-- Group options will be loaded here -->
+        </div>
+    </div>
+    <input type="hidden" id="id_niveau" name="id_niveau">
+    <input type="hidden" id="id_spec" name="id_spec">
+    <input type="hidden" id="id_section" name="id_section">
+    <input type="hidden" id="id_groupe" name="id_groupe">
+</div>
+
+      <div class="input-box">
+        <span>{{ t "Room" }}:</span>
+        <select id="id_salle" name="id_salle">
+          <!-- Add room options here -->
+        </select>
+      </div>
+      <button id="submit" type="submit">{{ t "Save" }}</button>
+    </div>
+    
+  </form>
+</div>
+  <!-- END OF BIG POPUP MENU FOR ADD -->
+
+
+<!-- BEGINING OF BIG POPUP MENU FOR DELETE -->
+<div id="deleteMenu" class="big-popup-menu">
+  <span class="close-btn">&times;</span>
+  <h3>{{ t "Are you sure you want to delete this session" }}?</h3>
+  <p id="session-delete-info"></p>
+  <button id="confirm-delete" type="button">Delete</button>
+  <button id="cancel-delete" type="button">Cancel</button>
+</div>
+<!-- END OF BIG POPUP MENU FOR DELETE -->
+
+
+<!-- BEGINING OF BIG POPUP MENU FOR MODIFY -->
+<div id="modifyMenu" class="big-popup-menu">
+  <span class="close-btn">&times;</span>
+  <h3>{{ t "Modify Session" }}</h3>
+  <form id="modify-form">
+      <input type="hidden" name="type_Seance">
+      <div class="input-box">
+          <span>{{ t "Day" }}:</span>
+          <select name="Jour">
+              <option value="Sunday">{{ t "Sunday" }}</option>
+              <option value="Monday">{{ t "Monday" }}</option>
+              <option value="Tuesday">{{ t "Tuesday" }}</option>
+              <option value="Wednesday">{{ t "Wednesday" }}</option>
+              <option value="Thursday">{{ t "Thursday" }}</option>
+              <option value="Saturday">{{ t "Saturday" }}</option>
+          </select>
+      </div>
+      <div class="input-box">
+          <span>{{ t "Session Time" }}:</span>
+          <select name="horaire">
+              <option value="1st Session">{{ t "1st Session" }} (8:00-9:30)</option>
+              <option value="2nd Session">{{ t "2nd Session" }} (9:35-11:05)</option>
+              <option value="3rd Session">{{ t "3rd Session" }} (11:10-12:40)</option>
+              <option value="4th Session">{{ t "4th Session" }} (12:45-14:15)</option>
+              <option value="5th Session">{{ t "5th Session" }} (14:20-15:50)</option>
+          </select>
+      </div>
+      <div class="input-box">
+          <span>{{ t "Room" }}:</span>
+          <select name="id_salle">
+              <option value="">{{ t "Select a room" }}</option>
+              <!-- Rooms will be populated dynamically -->
+          </select>
+      </div>
+      <button type="submit">{{ t "Save Changes" }}</button>
+  </form>
+</div>
+<!-- END OF BIG POPUP MENU FOR MODIFY -->
+
+<!-- BEGINNING OF BIG POPUP MENU FOR ABSENCE -->
+<div id="absenceMenu" class="big-popup-menu">
+  <span class="close-btn">&times;</span>
+  <h3>{{ t "Mark Absence" }}</h3>
+  <form id="absence-form">
+      <div class="input-box">
+        <span>Reason for Absence: <span class="optional-text">*{{ t "optional" }}</span></span>
+        <textarea id="absenceReason" placeholder="Enter reason for absence"></textarea>
+      </div>
+      <button id="confirmAbsence" type="submit">{{ t "Confirm Absence" }}</button>
+  </form>
+</div>
+<!-- END OF BIG POPUP MENU FOR ABSENCE -->
+
+
+<script src="/frontendForindex.js"></script>
+<script src="/beTimeTablePopulation.js"></script>
+<script src="/beModifySession.js"></script>
+<script src="/beAddSession.js"></script>
+<script src="/beDeleteSession.js"></script>
+<script src="/beAbsence.js"></script>
+<script src="/beNotification.js"></script>
+   </body>
+</html>
+

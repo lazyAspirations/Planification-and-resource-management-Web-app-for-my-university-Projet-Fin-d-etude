@@ -1,0 +1,295 @@
+*{
+  margin: 0;
+  padding-top: 10px; /*badalt hadi gir mabidman*/
+  box-sizing: bordr-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f8fafc;
+  mix-blend-mode: darken;
+  place-items: center;
+  position: relative;/*delete if i want to make the popup work correctly*/
+  margin-top: 100px;
+  overflow-y: auto; /* Enable vertical scrolling for the entire page */
+  height: 1500px; /* Set the height to the viewport height */
+}
+
+
+.timetable {
+  width: 90%;
+  border: 2px solid black;
+  height: 800px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.timetable thead tr {
+  height: auto;
+}
+
+.timetable thead .sub {
+  height: auto;
+  padding: 10px 5px;
+}
+
+.timetable td {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid black;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.timetable tbody tr {
+  height: calc(800px / 6);
+}
+
+.timetable tbody td:first-child {
+  width: 120px;
+}
+
+.timetable tbody td:not(:first-child) {
+  width: calc((100% - 120px) / 5);
+}
+
+.sub {
+  color: black;
+  font-family: sans-serif;
+  font-weight: 600;
+  background-color: #ffffff;
+  font-size: 20px;
+}
+
+.sub span {
+  font-size: 13px;
+  display: block;
+}
+
+
+.session-entry {
+  padding: 5px;
+  margin: 2px 0;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border-left: 4px solid #ccc;
+}
+
+.session-entry .module {
+  font-weight: bold;
+}
+
+.session-entry .type {
+  font-style: italic;
+  color: #6c757d;
+}
+
+.session-entry .room {
+  color: #28a745;
+}
+
+/* Different colors for session types */
+.session-entry.lecture {
+  background-color: #e3f2fd;
+  border-left-color: #2196f3;
+}
+
+.session-entry.tutorial {
+  background-color: #e8f5e9;
+  border-left-color: #4caf50;
+}
+
+.session-entry.lab {
+  background-color: #fff3e0;
+  border-left-color: #ff9800;
+}
+
+
+
+  .session-entry {
+    padding: 5px;
+    margin: 2px 0;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border-left: 4px solid #ccc;
+  }
+  
+/* Target the elements inside session-content */
+.session-entry .session-module {
+  font-weight: bold;
+  color: #2e59d9; /* Added color for better visibility */
+}
+
+.session-entry .session-type {
+  font-style: italic;
+  color: #6c757d;
+}
+
+.session-entry .session-info {
+  font-size: 0.85em;
+  margin: 3px 0;
+}
+  /* Different colors for session types */
+  .session-entry.lecture {
+    background-color: #e3f2fd;
+    border-left-color: #2196f3;
+  }
+  
+  .session-entry.tutorial {
+    background-color: #e8f5e9;
+    border-left-color: #4caf50;
+  }
+  
+  .session-entry.lab {
+    background-color: #fff3e0;
+    border-left-color: #ff9800;
+  }
+  
+  .session-entry.online {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    border-left: 4px solid #9c27b0;
+  }
+  
+  
+  .session-entry.temporary {
+    position: relative;
+    border-left: 4px solid #FFA500;
+    background-color: #FFF8E1;
+    opacity: 0.9;
+  }
+  
+  .session-entry.temporary::before {
+    content: "TEMP";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #FFA500;
+    color: white;
+    font-size: 0.7em;
+    padding: 2px 5px;
+    border-radius: 0 0 0 4px;
+    font-weight: bold;
+  }
+  
+  .session-entry .expires-info {
+    font-size: 0.75em;
+    color: #E65100;
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  .online-sessions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .session-entry.online .session-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .session-entry.add-request {
+    background-color: rgba(0, 128, 0, 0.2);
+    border-left: 4px solid green;
+  }
+  
+  .session-entry.delete-request {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-left: 4px solid red;
+  }
+  
+  .session-entry.modify-request {
+    background-color: rgba(165, 42, 42, 0.2);
+    border-left: 4px solid brown;
+  }
+  
+  .session-entry.absence-request {
+    background-color: rgba(255, 192, 203, 0.3);
+    border-left: 4px solid pink;
+  }
+  
+  .request-status {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
+  }
+
+  .firstbox, .lastbox {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .firstbox:hover, .lastbox:hover {
+    background-color: #f0f0f0;
+    color: #333333e0;
+  }
+  
+  .session-content {
+    height: 100%;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .form-group {
+    position: absolute;
+    left: 16px;
+    top: 116px;
+    z-index: 10;
+  }
+  
+  .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .form-group label:has(input[type="checkbox"]:checked) {
+    background: rgb(82, 154, 196);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .form-group input[type="checkbox"] {
+    display: none;
+  }
+
+  .show-requests-text {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: 120%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #222;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.95em;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 100;
+  }
+  
+  .form-group label:hover .show-requests-text,
+  .form-group label:focus-within .show-requests-text {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .session-entry.onlinetutorial,
+.session-entry.onlinelab, 
+.session-entry.onlinelecture {
+  background-color: #770d8a2c;
+  border: 1px solid #bf6ace;
+  border-left: 4px solid #bf6ace;
+}

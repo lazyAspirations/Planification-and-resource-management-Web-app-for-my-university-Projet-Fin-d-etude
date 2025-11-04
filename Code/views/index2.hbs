@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ t "Home" }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/i2.css">
+    <link rel="stylesheet" href="/ETstyle.css"> 
+</head>
+<body>
+    <!-- BEGINNING OF NAV BAR -->
+ <nav>
+        <div class="Navwrapper">
+         <div class="logo"><a href="/index2">ClassFlow</a></div>
+       <ul class="nav-links">
+         <li><a href="/index2">{{ t "Time-Tables" }}</a></li>
+         <li><a href="/sondage">{{ t "Polls" }}</a></li>
+         <li><a href="/Exams2">{{ t "Exams" }}</a></li>
+         <li><a href="/evenement2">{{ t "Events" }}</a></li>
+       </ul>
+   <div class="right-icons">
+         {{!-- <div class="theme-toggle">
+         <i class="fas fa-moon"></i>
+         </div> --}}
+         <div class="notification">
+  <i class="fas fa-bell"></i>
+  <span class="notification-count" id="notification-count">0</span>
+  <ul class="notification-dropdown">
+    <li class="notification-header">
+      <div class="popind">
+  <span>{{ t "Notifications" }}</span>
+  <button id="filter-unseen-btn" style="margin-left:5px; padding:2px 10px; border-radius:5px; border:1px solid #18426d; background:#e0e0e0; color:#18426d; font-size:12px; cursor:pointer; display:box;">{{ t "Unseen" }}</button>
+  </div>
+  <div class="notification-actions">
+    <i class="fas fa-ellipsis-v notification-menu-trigger" id="points"></i>
+    <div class="notification-actions-menu">
+      <a href="/NotificationEtu"><i class="fas fa-list"></i>{{ t " See all" }}</a>
+      <a href="#" id="mark-all-read"><i class="fas fa-check-double"></i> {{ t "Mark all as read" }}</a>
+    </div>
+  </div>
+</li>
+    <div class="notification-items" id="notification-items">
+      <!-- Notifications will be loaded here dynamically -->
+    </div>
+  </ul>
+</div>
+         <div class="Navprofile">
+        <i class="fas fa-user-circle"></i> <!-- FontAwesome user icon -->
+        <span class="user-name">{{user.nom}} {{user.prenom}}</span>
+        <ul class="profile-dropdown">
+  <li>
+    <a href="/userInterface2">
+      <i class="fas fa-cog"></i> {{ t "Settings" }} </a>
+  </li>
+  <li>
+    <a href="/logout">
+      <i class="fas fa-sign-out-alt"></i>{{ t "Sign Out" }}</a>
+  </li>
+</ul>
+         </div>
+       </div>
+     </div>
+   </nav>
+<!-- END OF NAV BAR -->
+
+<!--BEGENING OF TABLE-->
+  <table class="timetable" id="timetable">
+    <tbody>
+       <thead>
+          <tr>
+            <td id="sub1"></td>
+            <td class="sub">1st Session   <!--badalt hadi-->
+              <span>8:00-9:30</span>  <!--zadt hadi-->
+            </td>
+            <td class="sub">2nd Session
+              <span>9:35-11:05</span>
+            </td>
+            <td class="sub">3rd Session
+             <span> 11:10-12:40</span>
+            </td>
+            <td class="sub">4th Session
+              <span>12:45-14:15</span>
+            </td>
+            <td class="sub">5th Session
+              <span>14:20-15:50</span>
+            </td>
+         </tr>
+      </thead>
+         
+         <tr>
+             <td class="sub">Sunday</td> <!--badalt hadi-->
+             <td class="firstbox">SUB1<br>fef </td>
+             <td class="firstbox">SUB2</td> <!--OBLIGATOIRE nbadlo les id vers class id lazam ikoun unique-->
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr>
+         <tr>
+             <td class="sub">Monday</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">Tuesday</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">Wednesday</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">Thursday</td>
+             <td class="firstbox">SUB1</td>
+             <td class="firstbox">SUB2</td>
+             <td class="firstbox">SUB3</td>               
+             <td class="firstbox ">SUB4</td>
+             <td class="firstbox">SUB5</td>
+         </tr><tr>
+             <td class="sub">Saturday</td>
+             <td class="lastbox">SUB1</td>
+             <td class="lastbox">SUB2</td>
+             <td class="lastbox">SUB3</td>               
+             <td class="lastbox">SUB4</td>
+             <td class="lastbox">SUB5</td>
+          </tr>
+          <tr id="online-row">
+             <td class="sub">ONLINE</td>
+             <td colspan="5" class="online-session-cell"></td>
+          </tr>
+      </tbody>
+   </table>
+<!--END OF TABLE-->
+<script src="/beNotification2.js"></script>
+<script src="/feforindex2.js"></script>
+<script src="/ETbeTimeTable.js"></script>
+</body>
+</html>
+

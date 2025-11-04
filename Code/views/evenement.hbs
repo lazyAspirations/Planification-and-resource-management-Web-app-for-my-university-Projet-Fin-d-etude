@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <link rel="stylesheet" href="/styleForEven.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+</head>
+<body>
+<!-- BEGINNING OF NAV BAR -->
+ <nav>
+        <div class="Navwrapper">
+         <div class="logo"><a href="/index">{{ t "ClassFlow" }}</a></div>
+       <ul class="nav-links">
+         <li><a href="/index">{{ t "Time-Tables" }}</a></li>
+         <li><a href="/Sondage_Ens">{{ t "Polls" }}</a></li>
+         <li><a href="/Exams">{{ t "Exams" }}</a></li>
+         <li><a href="/evenement">{{ t "Events" }}</a></li>
+       </ul>
+   <div class="right-icons">
+         {{!-- <div class="theme-toggle">
+         <i class="fas fa-moon"></i>
+         </div> --}}
+         <!-- Update the notification dropdown in your nav bar -->
+<div class="notification">
+  <i class="fas fa-bell"></i>
+  <span class="notification-count" id="notification-count">0</span>
+  <ul class="notification-dropdown">
+    <li class="notification-header">
+      <div class="popind">
+  <span>{{ t "Notifications" }}</span>
+  <button id="filter-unseen-btn" style="margin-left:5px; padding:2px 10px; border-radius:5px; border:1px solid #18426d; background:#e0e0e0; color:#18426d; font-size:12px; cursor:pointer; display:box;">Unseen</button>
+  </div>
+  <div class="notification-actions">
+    <i class="fas fa-ellipsis-v notification-menu-trigger" id="points"></i>
+    <div class="notification-actions-menu">
+      <a href="/NotificationEns"><i class="fas fa-list"></i> {{ t "See all" }}</a>
+      <a href="#" id="mark-all-read"><i class="fas fa-check-double"></i> {{ t "Mark all as read" }}</a>
+    </div>
+  </div>
+</li>
+    <div class="notification-items" id="notification-items">
+      <!-- Notifications will be loaded here dynamically -->
+    </div>
+  </ul>
+</div>
+         <div class="Navprofile">
+        <i class="fas fa-user-circle"></i> 
+        <span class="user-name">{{user.nom}} {{user.prenom}}</span>
+        <ul class="profile-dropdown">
+         <li>
+           <a href="/userInterface">
+           <i class="fas fa-cog"></i> {{ t "Settings" }} </a>
+         </li>
+         <li>
+           <a href="/logout">
+           <i class="fas fa-sign-out-alt"></i>{{ t "Sign Out" }}</a>
+         </li>
+       </ul>
+         </div>
+       </div>
+     </div>
+   </nav>
+<!-- END OF NAV BAR -->
+
+<div id="errMsg"></div>
+
+<div class="bod">
+    <div id="event-container">
+<div id="no-events" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh;">
+    <div>{{ t "No events have been created yet" }}</div>
+    <button class="create-event-btn" style="margin-top: 20px;">{{ t "Create an event" }}</button>
+</div>
+<div id="events-list" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>{{ t "Upcoming Interrogations" }}</h2>
+        <button class="create-event-btn" style="margin: 0;">{{ t "Create an event" }}</button>
+    </div>
+            <div id="events-table-container">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #18426d; color: white;">
+                            <th style="padding: 10px; text-align: left;">{{ t "Cancel" }}</th>
+                            <th style="padding: 10px; text-align: left;">{{ t "Module" }}</th>
+                            <th style="padding: 10px; text-align: left;">{{ t "Target" }}</th>
+                            <th style="padding: 10px; text-align: left;">{{ t "Day" }}</th>
+                            <th style="padding: 10px; text-align: left;">{{ t "Time" }}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="events-table-body">
+                        <!-- Events will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Event Type Modal -->
+<div id="event-type-modal" class="modal" style="display:none;">
+    <div class="modal-content" style="width: 350px;">
+        <span class="close" id="close-event-type">&times;</span>
+        <h3>{{ t "Select Event Type" }}</h3>
+        <div style="margin: 20px 0;">
+            <button class="event-type-btn" data-type="intero">{{ t "Interrogation" }}</button>
+            <button class="event-type-btn" data-type="other" disabled>{{ t "Other (coming soon)" }}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Interrogation Creation Modal -->
+<div id="intero-modal" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width: 600px;">
+        <span class="close" id="close-intero">&times;</span>
+        <h3>{{ t "Create Interrogation" }}</h3>
+        <form id="intero-form">
+            <div>
+                <label><input type="radio" name="target" value="group" checked>{{ t " For a group" }}</label>
+                <label style="margin-left: 20px;"><input type="radio" name="target" value="section">{{ t " For a section" }}</label>
+            </div>
+            <div id="academic-selection" style="margin: 15px 0;">
+                <!-- Academic selection menu will be injected here (reuse from add session) -->
+            </div>
+            <div>
+                <label><input type="radio" name="session-type" value="my" checked>{{ t " My sessions" }}</label>
+                <label style="margin-left: 20px;"><input type="radio" name="session-type" value="other">{{ t " Other sessions" }}</label>
+            </div>
+            <div id="session-select-container" style="margin: 15px 0;">
+                <!-- Session select will be injected here -->
+            </div>
+            <div>
+                <label>{{ t "Week:" }}</label>
+                <select id="week-select" name="week">
+                    <option value="0">{{ t "This week" }}</option>
+                    <option value="1">{{ t "Next week" }}</option>
+                    <option value="2">{{ t "In 2 weeks" }}</option>
+                    <option value="3">{{ t "In 3 weeks" }}</option>
+                </select>
+            </div>
+            <button type="submit" style="margin-top: 20px;">{{ t "Confirm" }}</button>
+        </form>
+    </div>
+</div>
+<script src="/feforindex2.js"></script>
+<script src="/beNotification.js"></script>
+<script src="/evenement.js"></script>
+<!-- Replace the existing script in evenement.hbs with this updated version -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to calculate the target date for an interrogation
+    function calculateTargetDate(sessionDay, weekOffset) {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Saturday'];
+        const dayIndex = days.indexOf(sessionDay);
+        if (dayIndex === -1) return 'Invalid day';
+        
+        const today = new Date();
+        const currentDay = today.getDay(); // 0=Sunday, 1=Monday, etc.
+        let daysToAdd = (dayIndex - currentDay + 7) % 7;
+        daysToAdd += weekOffset * 7;
+        
+        const targetDate = new Date(today);
+        targetDate.setDate(today.getDate() + daysToAdd);
+        return targetDate;
+    }
+
+    // Format date as "Day, Month Date, Year"
+    function formatDate(date) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // Fetch events from the server
+ fetch('/api/teacher/intero-events')
+        .then(response => response.json())
+        .then(events => {
+            const noEventsDiv = document.getElementById('no-events');
+            const eventsListDiv = document.getElementById('events-list');
+            const eventsTableBody = document.getElementById('events-table-body');
+            
+            if (events.length > 0) {
+                noEventsDiv.style.display = 'none';
+                eventsListDiv.style.display = 'block';
+                
+                eventsTableBody.innerHTML = events.map(event => {
+                    const target = event.id_groupe ? 
+                        `Group ${event.group_number} (${event.section_name})` : 
+                        `Section ${event.section_name}`;
+                    const sessionDate = calculateTargetDate(event.Jour, 0);
+                    
+                    return `
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 10px;">
+                                <span class="cancel-btn" data-event-id="${event.id}" title="Cancel event" style="cursor:pointer; color:red;">&#10006;</span>
+                            </td>
+                            <td style="padding: 10px;">${event.module_name}</td>
+                            <td style="padding: 10px;">${target}</td>
+                            <td style="padding: 10px;">For ${formatDate(sessionDate)}</td>
+                            <td style="padding: 10px;">${event.horaire}</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                // Add event listeners to cancel buttons
+                document.querySelectorAll('.cancel-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const eventId = this.getAttribute('data-event-id');
+                        if (confirm('Are you sure you want to cancel this event?')) {
+                            fetch('/api/teacher/cancel-event', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ eventId })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Optionally, remove the event row or refresh the events list
+                                    this.parentElement.parentElement.remove();
+                                } else {
+                                    alert('Error: ' + (data.error || 'Failed to cancel event'));
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('An error occurred while cancelling the event');
+                            });
+                        }
+                    });
+                });
+            } else {
+                noEventsDiv.style.display = 'flex';
+                eventsListDiv.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching events:', error);
+            document.getElementById('errMsg').textContent = 'Error loading events. Please try again.';
+        });
+});
+</script>
+</body>
+</html>

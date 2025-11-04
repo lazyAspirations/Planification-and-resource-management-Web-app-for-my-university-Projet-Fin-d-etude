@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/sondage.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <title>{{ t "Polls" }}</title>
+</head>
+<body>
+    <nav>
+        <div class="Navwrapper">
+         <div class="logo"><a href="/index2">ClassFlow</a></div>
+       <ul class="nav-links">
+         <li><a href="/index2">{{ t "Time-Tables" }}</a></li>
+         <li><a href="/sondage">{{ t "Polls" }}</a></li>
+         <li><a href="/Exams2">{{ t "Exams" }}</a></li>
+         <li><a href="/evenement2">{{ t "Events" }}</a></li>
+       </ul>
+   <div class="right-icons">
+         {{!-- <div class="theme-toggle">
+         <i class="fas fa-moon"></i>
+         </div> --}}
+                 <div class="notification">
+  <i class="fas fa-bell"></i>
+  <span class="notification-count" id="notification-count">0</span>
+  <ul class="notification-dropdown">
+    <li class="notification-header">
+      <div class="popind">
+  <span>{{ t "Notifications" }}</span>
+  <button id="filter-unseen-btn" style="margin-left:5px; padding:2px 10px; border-radius:5px; border:1px solid #18426d; background:#e0e0e0; color:#18426d; font-size:12px; cursor:pointer; display:box;">{{ t "Unseen" }}</button>
+  </div>
+  <div class="notification-actions">
+    <i class="fas fa-ellipsis-v notification-menu-trigger" id="points"></i>
+    <div class="notification-actions-menu">
+      <a href="/NotificationEtu"><i class="fas fa-list"></i> {{ t "See all" }}</a>
+      <a href="#" id="mark-all-read"><i class="fas fa-check-double"></i> {{ t "Mark all as read" }}</a>
+    </div>
+  </div>
+</li>
+    <div class="notification-items" id="notification-items">
+      <!-- Notifications will be loaded here dynamically -->
+    </div>
+  </ul>
+</div>
+         <div class="Navprofile">
+        <i class="fas fa-user-circle"></i> <!-- FontAwesome user icon -->
+        <span class="user-name">{{user.nom}} {{user.prenom}}</span>
+        <ul class="profile-dropdown">
+  <li>
+    <a href="/userInterface2">
+      <i class="fas fa-cog"></i> {{ t "Settings" }} </a>
+  </li>
+  <li>
+    <a href="/logout">
+      <i class="fas fa-sign-out-alt"></i>{{ t "Sign Out" }}</a>
+  </li>
+</ul>
+         </div>
+       </div>
+     </div>
+   </nav>
+   <div class='bod'>
+    <div id="container">
+    </div>
+  </div>
+  <script src="/beNotification2.js"></script>
+ <script src="/feforindex2.js"></script>
+  <script src="/sondage.js"></script>
+
+</body>
+</html>

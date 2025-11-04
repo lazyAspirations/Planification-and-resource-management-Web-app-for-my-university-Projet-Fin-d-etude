@@ -1,0 +1,227 @@
+body {
+    background: #f5f5f5;
+    margin-top: 20px;
+}
+
+.ui-w-80 {
+    width : 80px !important;
+    height: auto;
+}
+
+.btn-default {
+    border-color: rgba(24, 28, 33, 0.1);
+    background  : rgba(0, 0, 0, 0);
+    color       : #4E5155;
+}
+
+
+label.btn {
+    margin-bottom: 0;
+}
+
+.btn-outline-primary {
+    border-color: #26B4FF;
+    background  : transparent;
+    color       : #26B4FF;
+}
+
+.btn {
+    cursor: pointer;
+    margin-right: 80px !important;
+}
+
+.text-light {
+    color: #babbbc !important;
+}
+
+.card {
+    background-clip: padding-box;
+    box-shadow     : 0 1px 4px rgba(24, 28, 33, 0.012);
+    min-height: 300px;
+}
+
+.row-bordered {
+    overflow: hidden;
+}
+
+.account-settings-fileinput {
+    position  : absolute;
+    visibility: hidden;
+    width     : 1px;
+    height    : 1px;
+    opacity   : 0;
+}
+
+.account-settings-links .list-group-item.active {
+    font-weight: bold !important;
+}
+
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+    background: transparent !important;
+}
+
+.account-settings-multiselect~.select2-container {
+    width: 100% !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+    padding     : 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+.light-style .account-settings-links .list-group-item.active {
+    color: #4e5155 !important;
+}
+
+.material-style .account-settings-links .list-group-item {
+    padding     : 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+.material-style .account-settings-links .list-group-item.active {
+    color: #4e5155 !important;
+}
+
+.dark-style .account-settings-links .list-group-item {
+    padding     : 0.85rem 1.5rem;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.dark-style .account-settings-links .list-group-item.active {
+    color: #fff !important;
+}
+
+.light-style .account-settings-links .list-group-item.active {
+    color: #4E5155 !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+    padding     : 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+.mt-3 {
+    margin-top: 0.5rem; 
+}
+
+
+/*BEGINING PASSWORD*/
+.inputBox {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  
+  .inputBox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .requirements {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  
+  .requirements ul {
+    list-style-type: none;
+    padding-left: 5px;
+    margin: 5px 0 0 0;
+  }
+  
+  .requirements li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 3px;
+  }
+  
+  .requirements li:before {
+    content: "✗";
+    color: #ff4444;
+    position: absolute;
+    left: 0;
+  }
+  
+  .requirements li.valid:before {
+    content: "✓";
+    color: #00C851;
+  }
+  
+  .error-message {
+    color: #ff4444;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+
+  .password-requirements ul {
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.password-requirements li {
+    margin-bottom: 3px;
+    font-size: 0.85rem;
+}
+
+.password-requirements .text-success {
+    color: #28a745 !important;
+}
+
+.password-requirements .text-danger {
+    color: #dc3545 !important;
+}
+
+#passwordMatchError {
+    height: 18px;
+}
+  /*ENDING PASSWORD*/
+
+p{
+    font-weight: bold;
+    /* margin-top: 35px !important; */
+}
+
+/* Section titles */
+.pAboutme, .pPref, .pAcademic {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #18426d;
+    margin: 1.5rem 0 1rem;
+    position: relative;
+    padding-top: 1rem;
+  }
+  
+  /* Section title underline effect */
+  .pAboutme::after, .pPref::after, .pAcademic::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 50px;
+    height: 2px;
+    background: #18426d;
+  }
+  
+  /* Thin line separator before each section (except the first one) */
+  .pAcademic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e0e0e0;
+  }
+  
+  /* Adjust spacing for the first section to avoid unnecessary top padding */
+  .pAboutme, .pPref {
+    padding-top: 0;
+    margin-top: 0;
+  }
+  
+  /* Remove the before pseudo-element from the first section */
+  .pAboutme::before, .pPref::before {
+    display: none;
+  }

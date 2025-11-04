@@ -1,0 +1,198 @@
+<!-- filepath: /home/odim/Downloads/coding trash/projet_fin_d'etude/finale version 32/clean/views/notificationPage3.hbs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Notifications</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/i.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .notification-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .notification-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ddd;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .notification-item.unseen {
+            background-color: #eaf3ff;
+            border-left-color: #1e90ff;
+        }
+        .notification-item.seen {
+            background-color: #f8f9fa;
+            border-left-color: #ffa502;
+        }
+        .notification-item.accepted {
+            background-color: #eafaf1;
+            border-left-color: #2ed573;
+        }
+        .notification-item.rejected {
+            background-color: #fff0f0;
+            border-left-color: #ff4757;
+        }
+        .notification-content {
+            display: flex;
+            align-items: center;
+        }
+        .notification-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .notification-status.unseen {
+            background-color: #1e90ff;
+        }
+        .notification-status.seen {
+            background-color: #ffa502;
+        }
+        .notification-status.accepted {
+            background-color: #2ed573;
+        }
+        .notification-status.rejected {
+            background-color: #ff4757;
+        }
+        .notification-time {
+            color: #777;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button">
+        <a href="/index3" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Timetable</a>
+    </div>
+    
+    <div class="notification-container">
+        <div class="notification-header">
+            <h2>Your Notifications</h2>
+        </div>
+        
+        <div id="notifications-list">
+            <!-- Notifications will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllNotifications();
+
+            function loadAllNotifications() {
+                fetch('/api/admin/notifications')
+                    .then(response => response.json())
+                    .then(data => {
+                        displayNotifications(data);
+                    })
+                    .catch(error => {
+                        console.error('Error loading notifications:', error);
+                    });
+            }
+
+            function displayNotifications(notifications) {
+                const container = document.getElementById('notifications-list');
+                container.innerHTML = '';
+                if (!notifications.length) {
+                    container.innerHTML = '<div class="notification-item">No notifications found</div>';
+                    return;
+                }
+                notifications.forEach(notif => {
+                    const item = document.createElement('div');
+                    const statusClass = getStatusClass(notif.status);
+                    item.className = `notification-item ${statusClass}`;
+                    item.innerHTML = `
+                        <div class="notification-content">
+                            <span class="notification-status ${statusClass}"></span>
+                            <div>
+                                <div>${getNotificationText(notif)}</div>
+                                <div class="notification-time">
+                                    ${formatDate(notif.DateTime)} • ${getStatusText(notif.status)}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    // Only mark as seen if status is null (unseen)
+                    if (notif.status === null) {
+                        item.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            fetch('/api/admin/mark-seen/' + notif.id, { method: 'POST' })
+                                .then(() => {
+                                    notif.status = -1;
+                                    displayNotifications(notifications);
+                                });
+                        });
+                    }
+                    container.appendChild(item);
+                });
+            }
+
+            function getStatusClass(status) {
+                if (status === null) return 'unseen';
+                if (status === -1) return 'seen';
+                if (status === 1 || status === 2) return 'accepted';
+                if (status === 0) return 'rejected';
+                return '';
+            }
+            function getStatusText(status) {
+                if (status === null) return 'Unseen';
+                if (status === -1) return 'Seen';
+                if (status === 1 || status === 2) return 'Accepted';
+                if (status === 0) return 'Rejected';
+                return '';
+            }
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const d = new Date(dateStr);
+                return d.toLocaleString();
+            }
+function getNotificationText(notif) {
+    const teacher = (notif.teacher_nom || '') + ' ' + (notif.teacher_prenom || '');
+    if (notif.type_demande === 'ajout') {
+        return `${teacher} requested to add a session`;
+    } else if (notif.type_demande === 'modif') {
+        return `${teacher} requested to modify a session`;
+    } else if (notif.type_demande === 'supp') {
+        return `${teacher} requested to delete a session`;
+    } else if (notif.type_demande === 'demIntero') {
+        return `${teacher} requested an interrogation session`;
+    } else if (notif.type_demande === 'tempo') {
+        return `${teacher} added a temporary session`;
+    } else if (notif.type_demande === 'abse') {
+        return `${teacher} will be absent`;
+    } else if (notif.type_demande === 'intero') {
+        return `${teacher} created an interrogation session`;
+    }
+    return 'Notification';
+}
+        });
+    </script>
+</body>
+</html>
